@@ -7,15 +7,20 @@ import os
 import smtplib
 
 
+
+
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
-print(voices[0].id)
-engine.setProperty('voice',voices[0].id)
+#print(voices[1].id)
+engine.setProperty('voice',voices[1].id)
 
 
 def speak(audio):
     engine.say(audio)
     engine.runAndWait()
+    
+
+
 
 
 def wishMe():
@@ -55,16 +60,17 @@ def sendEmail(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
     server.ehlo()
-    server.login('ur_mail@gmail.com','ur_password')
-    server.sendmail('SenderMail@gmail.com', to, content)
+    server.login('sandhya.rani.ydv@gmail.com','password')
+    server.sendmail('anshukumaribe@gmail.com', to, content)
+    
     server.close()
 
 
 
 if __name__=="__main__":
     wishMe()
-    # while True:
-    if 1:
+    while True:
+    # if 1:
         query = takeCommand().lower()
 
         #Logic for executing tasks based on query
@@ -77,22 +83,24 @@ if __name__=="__main__":
             speak(results)
 
         elif 'open youtube' in query:
-            webbrowser.open("youtube.com")
+            webbrowser.open("https://www.youtube.com/")
 
-        elif 'open google' in query:
-            webbrowser.open("google.com")
+        elif 'open google' in query: 
+            webbrowser.open("https://www.google.com/")
 
         elif 'open github' in query:
-            webbrowser.open("github.com")
+            webbrowser.open("https://github.com/")
 
-        elif 'open netacad' in query:
-            webbrowser.open("netacad.com")
+        elif 'open stackoverflow' in query:
+            webbrowser.open("https://stackoverflow.com/")
+            
+        elif 'open institute' in query:
+            webbrowser.open("https://ietagra.org.in/")
 
         elif 'play music' in query:
-            music_dr = 'E:\\Downloads\\CANDYS PLAYLIST'
+            music_dr = 'E:\\Downloads\\SANDYS PLAYLIST'
             songs = os.listdir(music_dr)
-
-            os.startfile(os.path.join(music_dr, songs[2]))
+            os.startfile(os.path.join(music_dr, songs[0]))
 
         elif 'the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
@@ -102,16 +110,18 @@ if __name__=="__main__":
             codePath = "E:\\JARVIS\\jarvis.py"
             os.startfile(codePath)
 
-        elif 'email to candy' in query:
+        elif 'email to anshu' in query:
             try:
                 speak("What should I say?")
                 content = takeCommand()
-                to = "SenderMail@gmail.com"
+                to = "anshukumaribe@gmail.com"
                 sendEmail(to, content)
                 speak("Email has been sent!")
             except Exception as e:
                 print(e)
                 speak("Sorry my friend. I am unable to send this email")
+                
+          
 
         elif 'quit' in query:
-            exit()
+            exit(0)
